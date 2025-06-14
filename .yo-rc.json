@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": false,
+    "nodeVersion": "18.20.6",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.24.0"
+    },
+    "version": "1.20.0",
+    "libraryName": "sir-control-register",
+    "libraryId": "5510628f-36da-46dd-a862-83185f5a53a7",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "SIRControlRegister",
+    "solutionShortDescription": "SIRControlRegister description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

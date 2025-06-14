@@ -1,0 +1,41 @@
+
+export interface IITMaster {    
+    PlantCodeId?: number;
+    CategoryId?:number;
+    SubCategoryId?:number;
+    SubCategory:any;
+    AddTypeId?:number;
+    AddType?:number;
+    Location :any;
+    OTC:any;
+    Recurring:any;
+    BillingCycleId?:number;
+    BillingCycle:any; 
+    Id:any;
+    BillingMonthId: number;
+    BillingMonth:any;
+    YearId: number;
+    Year:any;
+    Budgeted:any;
+    PONumber:any;
+    POValue:any;
+    Total:any;
+    Actual:any;
+    ProjectName:any;
+    Created:any;
+    Editor:any;
+    Modified:any;
+    RenewalDate:any;
+    Category:any;
+    PlantCode:any;
+    GroupApproverId:any;
+    Site:any;
+    Costperunit:any;
+    Quantity:any;
+    Total2:any;
+    SiteId:any;
+    SiteBudgeted:any;
+    ProcuredQty:any;
+    BalanceQty:any;
+    TotalCost:any;    
+}

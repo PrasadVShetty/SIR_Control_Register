@@ -1,0 +1,24 @@
+export interface IWSLMaster {
+    Title:any;
+    ProjectCode:any;
+    ProjectCodeId:any;
+    PlantCode:any;
+    PlantCodeId:any;
+    ProjectName:any;
+    Location:any;
+    ItemCode:any;
+    ItemCodeId:any;
+    ItemDescription:any;
+    UOM:any;
+    OnHandQty:any;
+    ExpiryDate:any;
+    Value:any;
+    ReasonforNonUtilization:any;
+    Lifeleftindays:any;
+    Remarks:any;
+    Id:number;
+    GroupApproverId:any;
+    Created:any;
+    Editor:any;
+    Modified:any;
+}

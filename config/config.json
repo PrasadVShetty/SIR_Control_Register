@@ -1,0 +1,73 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "sir-control-register-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/sirControlRegister/SirControlRegisterWebPart.js",
+          "manifest": "./src/webparts/sirControlRegister/SirControlRegisterWebPart.manifest.json"
+        }
+      ]
+    },
+    "wsl-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/wsl/WslWebPart.js",
+          "manifest": "./src/webparts/wsl/WslWebPart.manifest.json"
+        }
+      ]
+    },
+    "it-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/it/ItWebPart.js",
+          "manifest": "./src/webparts/it/ItWebPart.manifest.json"
+        }
+      ]
+    },
+    "prmrr-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/prmrr/PrmrrWebPart.js",
+          "manifest": "./src/webparts/prmrr/PrmrrWebPart.manifest.json"
+        }
+      ]
+    },
+    "drr-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/drr/DrrWebPart.js",
+          "manifest": "./src/webparts/drr/DrrWebPart.manifest.json"
+        }
+      ]
+    },
+    "sifr-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/sifr/SifrWebPart.js",
+          "manifest": "./src/webparts/sifr/SifrWebPart.manifest.json"
+        }
+      ]
+    },
+    "sr-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/sr/SrWebPart.js",
+          "manifest": "./src/webparts/sr/SrWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SirControlRegisterWebPartStrings": "lib/webparts/sirControlRegister/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "WslWebPartStrings": "lib/webparts/wsl/loc/{locale}.js",
+    "ItWebPartStrings": "lib/webparts/it/loc/{locale}.js",
+    "PrmrrWebPartStrings": "lib/webparts/prmrr/loc/{locale}.js",
+    "DrrWebPartStrings": "lib/webparts/drr/loc/{locale}.js",
+    "SifrWebPartStrings": "lib/webparts/sifr/loc/{locale}.js",
+    "SrWebPartStrings": "lib/webparts/sr/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "sir-control-register-client-side-solution",
+    "id": "5510628f-36da-46dd-a862-83185f5a53a7",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.20.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "SIRControlRegister description"
+      },
+      "longDescription": {
+        "default": "SIRControlRegister description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "sir-control-register Feature",
+        "description": "The feature that activates elements of the sir-control-register solution.",
+        "id": "c150c614-cb89-46e2-b427-2c5e32590311",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/sir-control-register.sppkg"
+  }
+}

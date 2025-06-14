@@ -1,0 +1,30 @@
+export interface IDRRMaster {
+    Id?: number;
+    ProjectCode:any;
+    ProjectCodeId:any;
+    PlantCode:any;
+    PlantCodeId:any;
+    TypeofItemId:any;
+    TypeofItem:any;
+    ProjectName:any;
+    Location:any;
+    ItemDescription:any;
+    UOM:any;
+    NewConsumedQtyuptopreviousMonthsinceinception:any;
+    RecdQtyUpTopreviousMonthsinceinception:any;
+    ScrapSoldOutQtyuptopreviousMonthsinceinception:any;
+    ScrapSoldOutValue:any;
+    CurrentMonthOpeningQty:any;
+    CurrentMonthRecdQty:any;
+    CurrentMonthSoldQty:any;
+    CurrentMonthScrapSoldValueINRexclTax:any;
+    TotalRecdQty:any;
+    TotalSold:any;
+    ScrapAvailable:any;
+    TotalSoldOutValueINRexclTax:any;                       
+    Remarks:any;
+    GroupApproverId:any;
+    Created:any;
+    Editor:any;
+    Modified:any;
+}
