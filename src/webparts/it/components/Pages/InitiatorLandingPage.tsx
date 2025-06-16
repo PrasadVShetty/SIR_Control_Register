@@ -236,7 +236,7 @@ export const InitiatorLanding: React.FunctionComponent<IItProps> = (props: IItPr
     Renewaldate: '',
     RenewalMonth: '',
     RenewalYear: '',
-    ViewId:''
+    ViewId: ''
   };
 
   const headers = [
@@ -272,422 +272,453 @@ export const InitiatorLanding: React.FunctionComponent<IItProps> = (props: IItPr
           }
         }, [formik.values.ViewId]);
 
-      return(
-      <div className="main">
-        {/* Actions & Filters */}
+        return (
+          <div className="main">
+            {/* Actions & Filters */}
 
-        <div className='element-actions'>
-          <span className={styles.btnnew} style={{ background: '#c4291c', borderColor: 'border-color' }}><Link to="/">Yearly Budgeted</Link></span>
-        </div>
-        <div className='element-actions'>
-          <span className={styles.btnnew} style={{ background: '#c4291c', borderColor: 'border-color' }}><Link to="/budgeted">Site Budgeted</Link></span>
-        </div>
+            <div className='element-actions'>
+              <span className={styles.btnnew} style={{ background: '#c4291c', borderColor: 'border-color' }}><Link to="/">Yearly Budgeted</Link></span>
+            </div>
+            <div className='element-actions'>
+              <span className={styles.btnnew} style={{ background: '#c4291c', borderColor: 'border-color' }}><Link to="/budgeted">Site Budgeted</Link></span>
+            </div>
 
-        <div className={styles.innertabs}>
-          <div className="p-3 bg-white shadow-sm border">
-            <h3 className={`${styles.headingh1} elementheading`}>Initiator Dashboard</h3>
+            <div className={styles.innertabs}>
+              <div className="p-3 bg-white shadow-sm border">
+                <h3 className={`${styles.headingh1} elementheading`}>Initiator Dashboard</h3>
 
-            <div className='row mr--1' style={{ display: 'flex', flexWrap: 'wrap', marginRight: '15px', gap: '15px' }}>
-              <div className='col-md-3'>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <label htmlFor="txtstartdate" className='col-form-label mb-0'>
-                    From Date
-                  </label>
-                  <DatePicker
-                    id="txtstartdate"
-                    placeholder="Enter or select a date"
-                    allowTextInput={true}
-                    firstDayOfWeek={DayOfWeek.Sunday}
-                    value={formik.values.Fromdate ? new Date(formik.values.Fromdate) : undefined}
-                    onSelectDate={(date) => formik.setFieldValue('Fromdate', date?.toISOString())}
-                    parseDateFromString={(input) => {
-                      const parts = input.split(/[\/\-]/).map(p => p.trim());
-                      const today = new Date();
+                <div className='row mr--1' style={{ display: 'flex', flexWrap: 'wrap', marginRight: '15px', gap: '0px' }}>
+                  <div className='col-md-3'>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label htmlFor="txtstartdate" className='col-form-label mb-0'>
+                        From Date
+                      </label>
+                      <DatePicker
+                        id="txtstartdate"
+                        placeholder="Enter or select a date"
+                        allowTextInput={true}
+                        firstDayOfWeek={DayOfWeek.Sunday}
+                        value={formik.values.Fromdate ? new Date(formik.values.Fromdate) : undefined}
+                        onSelectDate={(date) => formik.setFieldValue('Fromdate', date?.toISOString())}
+                        parseDateFromString={(input) => {
+                          const parts = input.split(/[\/\-]/).map(p => p.trim());
+                          const today = new Date();
 
-                      if (parts.length === 1 && /^\d{1,2}$/.test(parts[0])) {
-                        return new Date(today.getFullYear(), today.getMonth(), parseInt(parts[0]));
-                      }
+                          if (parts.length === 1 && /^\d{1,2}$/.test(parts[0])) {
+                            return new Date(today.getFullYear(), today.getMonth(), parseInt(parts[0]));
+                          }
 
-                      if (parts.length === 2 && /^\d{1,2}$/.test(parts[0]) && /^\d{1,2}$/.test(parts[1])) {
-                        return new Date(today.getFullYear(), parseInt(parts[1]) - 1, parseInt(parts[0]));
-                      }
+                          if (parts.length === 2 && /^\d{1,2}$/.test(parts[0]) && /^\d{1,2}$/.test(parts[1])) {
+                            return new Date(today.getFullYear(), parseInt(parts[1]) - 1, parseInt(parts[0]));
+                          }
 
-                      if (parts.length === 3) {
-                        const [day, month, year] = parts.map(Number);
-                        if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
-                          return new Date(year, month - 1, day);
+                          if (parts.length === 3) {
+                            const [day, month, year] = parts.map(Number);
+                            if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+                              return new Date(year, month - 1, day);
+                            }
+                          }
+
+                          return undefined;
+                        }}
+                        formatDate={(date) =>
+                          date
+                            ? `${('0' + date.getDate()).slice(-2)}/${('0' + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`
+                            : ''
                         }
-                      }
+                        styles={{ root: { width: '100%' } }}
+                      />
+                    </div>
 
-                      return undefined;
-                    }}
-                    formatDate={(date) =>
-                      date
-                        ? `${('0' + date.getDate()).slice(-2)}/${('0' + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`
-                        : ''
-                    }
-                    styles={{ root: { width: '100%' } }}
-                  />
-                </div>
-
-                {formik.errors.Fromdate && (
-                  <div style={{ paddingTop: 4, color: "#B2484D", fontSize: ".75rem", fontFamily: "Segoe UI" }}>
-                    {formik.errors.Fromdate}
+                    {formik.errors.Fromdate && (
+                      <div style={{ paddingTop: 4, color: "#B2484D", fontSize: ".75rem", fontFamily: "Segoe UI" }}>
+                        {formik.errors.Fromdate}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              <div className='col-md-3'>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <label htmlFor="txtenddate" className='col-form-label mb-0'>
-                    End Date
-                  </label>
-                  <DatePicker
-                    id="txtenddate"
-                    placeholder="Enter or select a date"
-                    allowTextInput={true}
-                    firstDayOfWeek={DayOfWeek.Sunday}
-                    value={formik.values.Enddate ? new Date(formik.values.Enddate) : undefined}
-                    onSelectDate={(date) => formik.setFieldValue('Enddate', date?.toISOString())}
-                    parseDateFromString={(input) => {
-                      const parts = input.split(/[\/\-]/).map(p => p.trim());
-                      const today = new Date();
+                  <div className='col-md-3'>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label htmlFor="txtenddate" className='col-form-label mb-0'>
+                        End Date
+                      </label>
+                      <DatePicker
+                        id="txtenddate"
+                        placeholder="Enter or select a date"
+                        allowTextInput={true}
+                        firstDayOfWeek={DayOfWeek.Sunday}
+                        value={formik.values.Enddate ? new Date(formik.values.Enddate) : undefined}
+                        onSelectDate={(date) => formik.setFieldValue('Enddate', date?.toISOString())}
+                        parseDateFromString={(input) => {
+                          const parts = input.split(/[\/\-]/).map(p => p.trim());
+                          const today = new Date();
 
-                      if (parts.length === 1 && /^\d{1,2}$/.test(parts[0])) {
-                        return new Date(today.getFullYear(), today.getMonth(), parseInt(parts[0]));
-                      }
+                          if (parts.length === 1 && /^\d{1,2}$/.test(parts[0])) {
+                            return new Date(today.getFullYear(), today.getMonth(), parseInt(parts[0]));
+                          }
 
-                      if (parts.length === 2 && /^\d{1,2}$/.test(parts[0]) && /^\d{1,2}$/.test(parts[1])) {
-                        return new Date(today.getFullYear(), parseInt(parts[1]) - 1, parseInt(parts[0]));
-                      }
+                          if (parts.length === 2 && /^\d{1,2}$/.test(parts[0]) && /^\d{1,2}$/.test(parts[1])) {
+                            return new Date(today.getFullYear(), parseInt(parts[1]) - 1, parseInt(parts[0]));
+                          }
 
-                      if (parts.length === 3) {
-                        const [day, month, year] = parts.map(Number);
-                        if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
-                          return new Date(year, month - 1, day);
+                          if (parts.length === 3) {
+                            const [day, month, year] = parts.map(Number);
+                            if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+                              return new Date(year, month - 1, day);
+                            }
+                          }
+
+                          return undefined;
+                        }}
+                        formatDate={(date) =>
+                          date
+                            ? `${('0' + date.getDate()).slice(-2)}/${('0' + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`
+                            : ''
                         }
-                      }
+                        styles={{ root: { width: '100%' } }}
+                      />
+                    </div>
 
-                      return undefined;
-                    }}
-                    formatDate={(date) =>
-                      date
-                        ? `${('0' + date.getDate()).slice(-2)}/${('0' + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`
-                        : ''
-                    }
-                    styles={{ root: { width: '100%' } }}
-                  />
-                </div>
-
-                {formik.errors.Enddate && (
-                  <div style={{ paddingTop: 4, color: "#B2484D", fontSize: ".75rem", fontFamily: "Segoe UI" }}>
-                    {formik.errors.Enddate}
+                    {formik.errors.Enddate && (
+                      <div style={{ paddingTop: 4, color: "#B2484D", fontSize: ".75rem", fontFamily: "Segoe UI" }}>
+                        {formik.errors.Enddate}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              <div className='col-md-3'>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <label htmlFor="renewalMonth" className='col-form-label mb-0'>
-                    Renewal Month
-                  </label>
-                  <div style={{ display: 'flex', gap: '8px' }}>
-                    {/* Month Dropdown */}
-                    <select
-                      id="renewalMonth"
-                      name="RenewalMonth"
-                      className="form-control"
-                      value={formik.values.RenewalMonth || ''}
-                      onChange={(e) => formik.setFieldValue('RenewalMonth', e.target.value)}
-                    >
-                      <option value="">Month</option>
-                      {[
-                        'January', 'February', 'March', 'April', 'May', 'June',
-                        'July', 'August', 'September', 'October', 'November', 'December'
-                      ].map((month, idx) => (
-                        <option key={idx} value={idx + 1}>{month}</option>
-                      ))}
-                    </select>
+                  <div className='col-md-3'>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label htmlFor="renewalMonth" className='col-form-label mb-0'>
+                        Renewal Month
+                      </label>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        {/* Month Dropdown */}
+                        <select
+                          id="renewalMonth"
+                          name="RenewalMonth"
+                          className="form-control"
+                          value={formik.values.RenewalMonth || ''}
+                          onChange={(e) => formik.setFieldValue('RenewalMonth', e.target.value)}
+                        >
+                          <option value="">Month</option>
+                          {[
+                            'January', 'February', 'March', 'April', 'May', 'June',
+                            'July', 'August', 'September', 'October', 'November', 'December'
+                          ].map((month, idx) => (
+                            <option key={idx} value={idx + 1}>{month}</option>
+                          ))}
+                        </select>
 
-                    {/* Year Dropdown */}
-                    <select
-                      id="renewalYear"
-                      name="RenewalYear"
-                      className="form-control"
-                      value={formik.values.RenewalYear || ''}
-                      onChange={(e) => formik.setFieldValue('RenewalYear', e.target.value)}
-                    >
-                      <option value="">Year</option>
-                      {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i).map((year) => (
-                        <option key={year} value={year}>{year}</option>
-                      ))}
-                    </select>
+                        {/* Year Dropdown */}
+                        <select
+                          id="renewalYear"
+                          name="RenewalYear"
+                          className="form-control"
+                          value={formik.values.RenewalYear || ''}
+                          onChange={(e) => formik.setFieldValue('RenewalYear', e.target.value)}
+                        >
+                          <option value="">Year</option>
+                          {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i).map((year) => (
+                            <option key={year} value={year}>{year}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Validation messages */}
+                    {(formik.errors.RenewalMonth || formik.errors.RenewalYear) && (
+                      <div style={{ paddingTop: 4, color: "#B2484D", fontSize: ".75rem", fontFamily: "Segoe UI" }}>
+                        {formik.errors.RenewalMonth || formik.errors.RenewalYear}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className='col-md-2'>
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '35px' }}>
+                      <PrimaryButton
+                        type='submit'
+                        style={{ background: '#c4291c', width: '120px', height: '35px' }}
+                        className={styles.btnprimary}
+                        text='Search'
+                        onClick={async () => { await onRequestInitiate(formik.values); }}
+                        value={'Submitted'}
+                        iconProps={{ iconName: 'Search' }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='col-md-3'>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
+                      padding: '0 15px'
+                    }}>
+                      <label className='col-form-label'>Search</label>
+                      <SearchBox
+                        placeholder="Search records..."
+                        className="search-input"
+                        onSearch={newValue => onBlockRequestSearch(newValue)}
+                        onClear={ev => onBlockRequestSearch('')}
+                        onBlur={ev => onBlockRequestSearch(ev.target.value)}
+                        styles={{
+                          root: { width: '100%' },
+                          field: {
+                            fontSize: '14px',
+                            padding: '8px 12px'
+                          },
+                          icon: {
+                            color: '#666'
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='col-md-3'>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
+                      padding: '0 15px'
+                    }}>
+                      <label className='col-form-label'>Payment Month</label>
+                      <select
+                        id='ddlBillingMonth'
+                        className='form-control'
+                        style={{
+                          width: '100%',
+                          padding: '8px 12px',
+                          fontSize: '14px',
+                          borderRadius: '4px',
+                          border: '1px solid #ccc'
+                        }}
+                        {...getFieldProps(formik, 'BillingMonthId')}
+                        onChange={async (e) => {
+                          formik.setFieldValue('BillingMonthId', e.target.value);
+                          await onChangePaymentMonth(e, formik);
+                        }}
+                      >
+                        <option value="">Select Payment Month</option>
+                        {months !== undefined ? months.map((Vend) => (
+                          <option key={Vend.Id} value={Vend.Id}>
+                            {Vend.Month}
+                          </option>
+                        )) : ''}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className='col-md-3'>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
+                      padding: '0 15px'
+                    }}>
+                      <label className='col-form-label'>Select View</label>
+                      <select
+                        id='ddlViewMonth'
+                        className='form-control'
+                        style={{
+                          width: '100%',
+                          padding: '8px 12px',
+                          fontSize: '14px',
+                          borderRadius: '4px',
+                          border: '1px solid #ccc'
+                        }}
+                        {...getFieldProps(formik, 'ViewId')}
+                        onChange={async (e) => {
+                          formik.setFieldValue('ViewId', e.target.value);
+                          await onChangeView(e, formik);
+                        }}
+                      >
+                        <option value="Site Budgeted">Site Budgeted</option>
+                        <option value="Yearly Budgeted">Yearly Budgeted</option>
+                        {/* Add other options here */}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className='col-md-3'>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
+                      padding: '0 15px'
+                    }}>
+                      <label className='col-form-label'>Plant Code</label>
+                      <select
+                        id='ddlPlantCode'
+                        className='form-control'
+                        style={{
+                          width: '100%',
+                          padding: '8px 12px',
+                          fontSize: '14px',
+                          borderRadius: '4px',
+                          border: '1px solid #ccc'
+                        }}
+                        {...getFieldProps(formik, 'PlantCodeId')}
+                        onChange={async (e) => {
+                          formik.setFieldValue('PlantCodeId', e.target.value);
+                          await onChangePlantCode(e, formik);
+                        }}
+                      >
+                        <option value="">Select</option>
+                        {plantCodes?.map((Vend) => (
+                          <option key={Vend.Id} value={Vend.Id}>{Vend.PlantCode}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className='col-md-6' style={{ marginLeft: '16px', paddingTop: '37px' }}>
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '37.5 px' }}>
+                      <PrimaryButton
+                        type='submit'
+                        style={{ background: '#c4291c', width: '120px', height: '35px' }}
+                        className={styles.btnprimary}
+                        text='All Data'
+                        onClick={async (e) => {
+                          await onRequestReset();
+                          formik.setFieldValue('PlantCodeId', '');
+                          formik.setFieldValue('Fromdate', '');
+                          formik.setFieldValue('Enddate', '');
+                          formik.setFieldValue('RenewalMonth', 'Month');
+                          formik.setFieldValue('RenewalYear', 'Year');
+                          formik.setFieldValue('BillingMonthId', '');
+                          formik.setFieldValue('ViewId', 'Site Budgeted');
+                        }}
+                        value={'Submitted'}
+                        iconProps={{ iconName: 'Reset' }}
+                      />
+                      {filteredData.length > 0 && (
+                        <CSVLink
+                          data={filteredData}
+                          headers={headers}
+                          filename="InitiatorLanding.csv"
+                          style={{
+                            textDecoration: 'none',
+                            color: 'white',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '7px',
+                            backgroundColor: '#c4291c',
+                            border: '1px solid #c4291c',
+                            borderRadius: '3px',
+                            padding: '8px',
+                            width: '120px',
+                            height: '35px'
+                          }}
+                        >
+                          <Icon iconName="ExcelDocument" style={{ color: 'white' }} />
+                          <span>Export</span>
+                        </CSVLink>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-                {/* Validation messages */}
-                {(formik.errors.RenewalMonth || formik.errors.RenewalYear) && (
-                  <div style={{ paddingTop: 4, color: "#B2484D", fontSize: ".75rem", fontFamily: "Segoe UI" }}>
-                    {formik.errors.RenewalMonth || formik.errors.RenewalYear}
-                  </div>
-                )}
-              </div>
 
-              <div className='col-md-2'>
-                <div style={{ display: 'flex', gap: '10px', marginTop: '35px' }}>
-                  <PrimaryButton
-                    type='submit'
-                    style={{ background: '#c4291c', width: '120px', height: '35px' }}
-                    className={styles.btnprimary}
-                    text='Search'
-                    onClick={async () => { await onRequestInitiate(formik.values); }}
-                    value={'Submitted'}
-                    iconProps={{ iconName: 'Search' }}
-                  />
-                </div>
-              </div>
-
-              <div className='col-md-3'>
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px',
-                  padding: '0 15px'
-                }}>
-                  <label className='col-form-label'>Search</label>
-                  <SearchBox
-                    placeholder="Search records..."
-                    className="search-input"
-                    onSearch={newValue => onBlockRequestSearch(newValue)}
-                    onClear={ev => onBlockRequestSearch('')}
-                    onBlur={ev => onBlockRequestSearch(ev.target.value)}
-                    styles={{
-                      root: { width: '100%' },
-                      field: {
-                        fontSize: '14px',
-                        padding: '8px 12px'
-                      },
-                      icon: {
-                        color: '#666'
-                      }
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className='col-md-3'>
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px',
-                  padding: '0 15px'
-                }}>
-                  <label className='col-form-label'>Payment Month</label>
-                  <select
-                    id='ddlBillingMonth'
-                    className='form-control'
-                    style={{
-                      width: '100%',
-                      padding: '8px 12px',
-                      fontSize: '14px',
-                      borderRadius: '4px',
-                      border: '1px solid #ccc'
-                    }}
-                    {...getFieldProps(formik, 'BillingMonthId')}
-                    onChange={async (e) => {
-                      formik.setFieldValue('BillingMonthId', e.target.value);
-                      await onChangePaymentMonth(e, formik);
-                    }}
-                  >
-                    <option value="">Select Payment Month</option>
-                    {months !== undefined ? months.map((Vend) => (
-                      <option key={Vend.Id} value={Vend.Id}>
-                        {Vend.Month}
-                      </option>
-                    )) : ''}
-                  </select>
-                </div>
-              </div>
-
-              <div className='col-md-3'>
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px',
-                  padding: '0 15px'
-                }}>
-                  <label className='col-form-label'>Select View</label>
-                  <select
-                    id='ddlViewMonth'
-                    className='form-control'
-                    style={{
-                      width: '100%',
-                      padding: '8px 12px',
-                      fontSize: '14px',
-                      borderRadius: '4px',
-                      border: '1px solid #ccc'
-                    }}
-                    {...getFieldProps(formik, 'ViewId')}
-                    onChange={async (e) => {
-                      formik.setFieldValue('ViewId', e.target.value);
-                      await onChangeView(e, formik);
-                    }}
-                  >
-                    <option value="Site Budgeted">Site Budgeted</option>
-                    <option value="Yearly Budgeted">Yearly Budgeted</option>
-                    {/* Add other options here */}
-                  </select>
-                </div>
-              </div>
-
-
-              <div className='col-md-6' style={{ marginLeft: '16px', paddingTop: '37px' }}>
-                <div style={{ display: 'flex', gap: '10px', marginTop: '37.5 px' }}>
-                  <PrimaryButton
-                    type='submit'
-                    style={{ background: '#c4291c', width: '120px', height: '35px' }}
-                    className={styles.btnprimary}
-                    text='All Data'
-                    onClick={async (e) => {
-                      await onRequestReset();
-                      formik.setFieldValue('PlantCodeId', '');
-                      formik.setFieldValue('Fromdate', '');
-                      formik.setFieldValue('Enddate', '');
-                      formik.setFieldValue('RenewalMonth', 'Month');
-                      formik.setFieldValue('RenewalYear', 'Year');
-                      formik.setFieldValue('BillingMonthId', '');
-                      formik.setFieldValue('ViewId', 'Site Budgeted');
-                    }}
-                    value={'Submitted'}
-                    iconProps={{ iconName: 'Reset' }}
-                  />
-                  {filteredData.length > 0 && (
-                    <CSVLink
-                      data={filteredData}
-                      headers={headers}
-                      filename="InitiatorLanding.csv"
-                      style={{
-                        textDecoration: 'none',
-                        color: 'white',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '7px',
-                        backgroundColor: '#c4291c',
-                        border: '1px solid #c4291c',
-                        borderRadius: '3px',
-                        padding: '8px',
-                        width: '120px',
-                        height: '35px'
-                      }}
-                    >
-                      <Icon iconName="ExcelDocument" style={{ color: 'white' }} />
-                      <span>Export</span>
-                    </CSVLink>
+                {/* Table Section */}
+                <div style={{ overflowX: 'auto' }}>
+                  {selectedView === 'Yearly Budgeted' && (
+                    <table className={`${styles.tblrequest} ${styles.tablebordered}`}>
+                      <thead>
+                        <tr>
+                          <th style={{ textAlign: 'center' }}>Location</th>
+                          <th style={{ textAlign: 'center' }}>Year</th>
+                          <th style={{ textAlign: 'center' }}>Category</th>
+                          <th style={{ textAlign: 'center' }}>Sub-Category</th>
+                          <th style={{ textAlign: 'center' }}>Type</th>
+                          <th style={{ textAlign: 'center' }}>Billing Cycle</th>
+                          <th style={{ textAlign: 'center' }}>Payment Month</th>
+                          <th style={{ textAlign: 'center' }}>OTC</th>
+                          <th style={{ textAlign: 'center' }}>Recurring</th>
+                          <th style={{ textAlign: 'center' }}>Total</th>
+                          <th style={{ textAlign: 'center' }}>Renewal Date</th>
+                          <th style={{ textAlign: 'center' }}>Edit</th>
+                          <th style={{ textAlign: 'center' }}>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {currentPageData.map(row => (
+                          <tr key={row.Id}>
+                            <td >{row.Location}</td>
+                            <td >{row.Year}</td>
+                            <td >{row.Category}</td>
+                            <td >{row.SubCategoryId}</td>
+                            <td >{row.AddType}</td>
+                            <td >{row.BillingCycle}</td>
+                            <td >{row.BillingMonth}</td>
+                            <td >{row.OTC}</td>
+                            <td >{row.Recurring}</td>
+                            <td >{row.Total}</td>
+                            <td >{moment(row.RenewalDate).format("DD/MM/YYYY")}</td>
+                            <td style={{ textAlign: 'center' }}><Link to={`/EditRequest/${row.Id}`}><Icon iconName="PageEdit" className={styles.icon} /></Link></td>
+                            <td style={{ textAlign: 'center' }}><Icon iconName="Delete" className={styles.icon} onClick={() => handleDelete(row.Id)} /></td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>)}
+                  {selectedView === 'Site Budgeted' && (
+                    <table className={`${styles.tblrequest} ${styles.tablebordered}`}>
+                      <thead>
+                        <tr>
+                          <th style={{ textAlign: 'center' }}>Plant Code</th>
+                          <th style={{ textAlign: 'center' }}>Project Name</th>
+                          <th style={{ textAlign: 'center' }}>Category</th>
+                          <th style={{ textAlign: 'center' }}>Sub-Category</th>
+                          <th style={{ textAlign: 'center' }}>Quantity</th>
+                          <th style={{ textAlign: 'center' }}>Cost per Unit</th>
+                          <th style={{ textAlign: 'center' }}>Total Price (Qty * Cost per Unit)</th>
+                          <th style={{ textAlign: 'center' }}>OTC</th>
+                          <th style={{ textAlign: 'center' }}>Procured Qty</th>
+                          <th style={{ textAlign: 'center' }}>Balance Qty (Total Qty - Procured Qty)</th>
+                          <th style={{ textAlign: 'center' }}>Total Cost (Total Price + OTC)</th>
+                          <th style={{ textAlign: 'center' }}>Edit</th>
+                          <th style={{ textAlign: 'center' }}>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {currentPageData.map(row => (
+                          <tr key={row.Id}>
+                            <td>{row.PlantCodeId}</td>
+                            <td>{row.ProjectName}</td>
+                            <td >{row.Category}</td>
+                            <td >{row.SubCategoryId}</td>
+                            <td >{row.Quantity}</td>
+                            <td >{row.Costperunit}</td>
+                            <td >{row.Total2}</td>
+                            <td >{row.OTC}</td>
+                            <td >{row.ProcuredQty}</td>
+                            <td >{row.BalanceQty}</td>
+                            <td >{row.TotalCost}</td>
+                            <td style={{ textAlign: 'center' }}><Link to={`/EditRequest/${row.Id}`}><Icon iconName="PageEdit" className={styles.icon} /></Link></td>
+                            <td style={{ textAlign: 'center' }}><Icon iconName="Delete" className={styles.icon} onClick={() => handleDelete(row.Id)} /></td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   )}
                 </div>
+
+                {/* Pagination */}
+                <ReactPaginate
+                  breakLabel="..."
+                  nextLabel="Next"
+                  previousLabel="Previous"
+                  pageRangeDisplayed={5}
+                  pageCount={pageCount}
+                  onPageChange={handlePageClick}
+                  className="pagination"
+                />
               </div>
             </div>
-
-
-            {/* Table Section */}
-            <div style={{ overflowX: 'auto' }}>
-              {selectedView === 'Yearly Budgeted' && (
-                <table className={`${styles.tblrequest} ${styles.tablebordered}`}>
-                  <thead>
-                    <tr>
-                      <th style={{ textAlign: 'center' }}>Location</th>
-                      <th style={{ textAlign: 'center' }}>Year</th>
-                      <th style={{ textAlign: 'center' }}>Category</th>
-                      <th style={{ textAlign: 'center' }}>Sub-Category</th>
-                      <th style={{ textAlign: 'center' }}>Type</th>
-                      <th style={{ textAlign: 'center' }}>Billing Cycle</th>
-                      <th style={{ textAlign: 'center' }}>Payment Month</th>
-                      <th style={{ textAlign: 'center' }}>OTC</th>
-                      <th style={{ textAlign: 'center' }}>Recurring</th>
-                      <th style={{ textAlign: 'center' }}>Total</th>
-                      <th style={{ textAlign: 'center' }}>Renewal Date</th>
-                      <th style={{ textAlign: 'center' }}>Edit</th>
-                      <th style={{ textAlign: 'center' }}>Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentPageData.map(row => (
-                      <tr key={row.Id}>
-                        <td >{row.Location}</td>
-                        <td >{row.Year}</td>
-                        <td >{row.Category}</td>
-                        <td >{row.SubCategoryId}</td>
-                        <td >{row.AddType}</td>
-                        <td >{row.BillingCycle}</td>
-                        <td >{row.BillingMonth}</td>
-                        <td >{row.OTC}</td>
-                        <td >{row.Recurring}</td>
-                        <td >{row.Total}</td>
-                        <td >{moment(row.RenewalDate).format("DD/MM/YYYY")}</td>
-                        <td style={{ textAlign: 'center' }}><Link to={`/EditRequest/${row.Id}`}><Icon iconName="PageEdit" className={styles.icon} /></Link></td>
-                        <td style={{ textAlign: 'center' }}><Icon iconName="Delete" className={styles.icon} onClick={() => handleDelete(row.Id)} /></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>)}
-              {selectedView === 'Site Budgeted' && (
-                <table className={`${styles.tblrequest} ${styles.tablebordered}`}>
-                  <thead>
-                    <tr>
-                      <th style={{ textAlign: 'center' }}>Plant Code</th>
-                      <th style={{ textAlign: 'center' }}>Project Name</th>
-                      <th style={{ textAlign: 'center' }}>Category</th>
-                      <th style={{ textAlign: 'center' }}>Sub-Category</th>
-                      <th style={{ textAlign: 'center' }}>Quantity</th>
-                      <th style={{ textAlign: 'center' }}>Cost per Unit</th>
-                      <th style={{ textAlign: 'center' }}>Total Price (Qty * Cost per Unit)</th>
-                      <th style={{ textAlign: 'center' }}>OTC</th>
-                      <th style={{ textAlign: 'center' }}>Procured Qty</th>
-                      <th style={{ textAlign: 'center' }}>Balance Qty (Total Qty - Procured Qty)</th>
-                      <th style={{ textAlign: 'center' }}>Total Cost (Total Price + OTC)</th>
-                      <th style={{ textAlign: 'center' }}>Edit</th>
-                      <th style={{ textAlign: 'center' }}>Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentPageData.map(row => (
-                      <tr key={row.Id}>
-                        <td>{row.PlantCode}</td>
-                        <td>{row.ProjectName}</td>
-                        <td >{row.Category}</td>
-                        <td >{row.SubCategoryId}</td>
-                        <td >{row.Quantity}</td>
-                        <td >{row.Costperunit}</td>
-                        <td >{row.Total2}</td>
-                        <td >{row.OTC}</td>
-                        <td >{row.ProcuredQty}</td>
-                        <td >{row.BalanceQty}</td>
-                        <td >{row.TotalCost}</td>
-                        <td style={{ textAlign: 'center' }}><Link to={`/EditRequest/${row.Id}`}><Icon iconName="PageEdit" className={styles.icon} /></Link></td>
-                        <td style={{ textAlign: 'center' }}><Icon iconName="Delete" className={styles.icon} onClick={() => handleDelete(row.Id)} /></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
-
-            {/* Pagination */}
-            <ReactPaginate
-              breakLabel="..."
-              nextLabel="Next"
-              previousLabel="Previous"
-              pageRangeDisplayed={5}
-              pageCount={pageCount}
-              onPageChange={handlePageClick}
-              className="pagination"
-            />
           </div>
-        </div>
-      </div>
-      );
-}}
+        );
+      }}
     </Formik>
   );
 };

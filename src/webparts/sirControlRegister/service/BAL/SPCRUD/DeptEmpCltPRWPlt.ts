@@ -9,7 +9,7 @@ export interface IDeptEmpCltPRWPltOps {
 export default function DeptEmpCltPRWPltOps() {
     const spCrudOps = SPCRUDOPS();
 
-    const getDeptEmpCltPRWPlt = async (strFilter: string, sorting: any,props: ISirControlRegisterProps): Promise<IDeptEmpCltPRWPlt[]> => {
+    const getDeptEmpCltPRWPlt = async (props: ISirControlRegisterProps): Promise<IDeptEmpCltPRWPlt[]> => {
         return await (await spCrudOps).getData("DeptEmpCltPRWPlt"
             , "*,Options,Status"
             , ""

@@ -9,7 +9,7 @@ export interface IActivityParticularOps {
 export default function ActivityParticularOps() {
     const spCrudOps = SPCRUDOPS();
 
-    const getActivityParticular = async (strFilter: string, sorting: any,props: ISirControlRegisterProps): Promise<IActivityParticular[]> => {
+    const getActivityParticular = async (props: ISirControlRegisterProps): Promise<IActivityParticular[]> => {
         return await (await spCrudOps).getData("ActivityParticular"
             , "*,ActivityParticular,Status"
             , ""

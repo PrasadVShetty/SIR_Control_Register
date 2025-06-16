@@ -9,7 +9,7 @@ export interface IFreeChargebleOps {
 export default function FreeChargebleOps() {
     const spCrudOps = SPCRUDOPS();
 
-    const getFreeChargeble = async (strFilter: string, sorting: any,props: ISirControlRegisterProps): Promise<IFreeChargeble[]> => {
+    const getFreeChargeble = async (props: ISirControlRegisterProps): Promise<IFreeChargeble[]> => {
         return await (await spCrudOps).getData("FreeChargeble"
             , "*,Options,Status"
             , ""
