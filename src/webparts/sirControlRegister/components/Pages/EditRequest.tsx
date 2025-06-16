@@ -373,7 +373,7 @@ export const EditRequest: React.FunctionComponent<ISirControlRegisterProps> = (p
           <div className='row'>
           <div className='col-md-12'>
           <div className="text-center heading">
-          <h4>New Request Form</h4>
+          <h4>SIR Controll Register Form</h4>
           </div>
           </div>
           </div>

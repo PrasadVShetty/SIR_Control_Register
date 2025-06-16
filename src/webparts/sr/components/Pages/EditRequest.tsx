@@ -327,7 +327,7 @@ export const EditRequest: React.FunctionComponent<ISrProps> = (props: ISrProps) 
                   <div className='row'>
                     <div className='col-md-12'>
                       <div className="text-center heading">
-                        <h4>New Request Form</h4>
+                        <h4>SR Form</h4>
                       </div>
                     </div>
                   </div>

@@ -201,7 +201,7 @@ export const NewRequest: React.FunctionComponent<IDrrProps> = (props: IDrrProps)
             <div className='row'>
               <div className='col-md-12' style={{ padding: '0 8px' }}>
                 <div className="text-center heading">
-                  <h4>New Request Form</h4>
+                  <h4>DRR Form</h4>
                 </div>
               </div>
             </div>
