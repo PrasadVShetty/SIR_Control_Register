@@ -24,6 +24,9 @@ import BillCycleRequestsOps from '../../service/BAL/SPCRUD/BicycleMaster';
 //SiteMaster
 import { ISiteMaster } from '../../service/INTERFACE/ISiteMaster';
 import SiteRequestsOps from '../../service/BAL/SPCRUD/SiteMaster';
+//DomainMaster
+import { IDomainMaster } from '../../service/INTERFACE/IDomainMaster';
+import DomainMasterOps from '../../service/BAL/SPCRUD/DomainMaster';
 //Date
 import { DatePicker } from '@fluentui/react/lib/DatePicker';
 import { DayOfWeek } from '@fluentui/react';
@@ -61,6 +64,7 @@ export const NewRequest: React.FunctionComponent<IItProps> = (props: IItProps) =
   const [testBrand, setBrandText] = React.useState<string[]>([]);
   const [user, setUser] = React.useState<IPersonaProps[]>();
   const [valuebudgeted, setvaluebudgeted] = useState(false);
+  const [Domain, setDomainData] = useState<IDomainMaster[]>();
   const [currentDate] = useState(getDate());
 
   const [isBudgetedPage, setIsBudgetedPage] = useState(false);
@@ -303,7 +307,9 @@ export const NewRequest: React.FunctionComponent<IItProps> = (props: IItProps) =
         const SiteData = await SiteRequestsOps().getSiteMasterData(props);
         setSiteData(SiteData);
 
-        
+        const DomainMasterData = await DomainMasterOps().getDomainMasterData(props);
+        setDomainData(DomainMasterData);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
