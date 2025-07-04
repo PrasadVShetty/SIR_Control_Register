@@ -148,6 +148,9 @@ export const NewRequest: React.FunctionComponent<IItProps> = (props: IItProps) =
         PRRequest['TotalCost'] = formValues.TotalCost,
         PRRequest['SiteId'] = formValues.Site
     }
+    if(formValues.Domain !== null && formValues.Domain !== undefined && formValues.Domain !== ''){
+       PRRequest['DomainId'] = formValues.Domain
+    }
     console.log(formValues);
     console.log(PRRequest);
 
@@ -236,7 +239,8 @@ export const NewRequest: React.FunctionComponent<IItProps> = (props: IItProps) =
     Site: '',
     ProcuredQty: '',
     BalanceQty: '',
-    TotalCost: ''
+    TotalCost: '',
+    Domain:''
   };
 
 
@@ -285,7 +289,7 @@ export const NewRequest: React.FunctionComponent<IItProps> = (props: IItProps) =
         if (props.requestType === 'budgeted') {
           setvaluebudgeted(true)
         }
-        
+
         const plantColl = await PlantCodeRequestsOps().getPlantCodeData(props);
         setPlantCollData(plantColl);
 
@@ -458,6 +462,40 @@ export const NewRequest: React.FunctionComponent<IItProps> = (props: IItProps) =
                     </div>
                   </div>
                   <br></br>
+                  {/* Domain */}
+                  {(() => {
+                    const selectedCategory = CategoryMasterData?.find(item => item.Id == formik.values.Category);
+                    if (selectedCategory?.Category === "Domain Component") {
+                      return (
+                        <div className='col-md-3'>
+                          <label className='col-form-label'>Domain</label>
+                          <div>
+                            <select id='ddlDomain' className='form-control' {...getFieldProps(formik, 'Domain')} onChange={async (e) => {
+                              formik.setFieldValue('Domain', e.target.value);
+                              await onChangeRequestType2(e, formik);
+                              formik.handleChange("Domain");
+                            }}>
+                              <option value="">Select</option>
+                              {Domain !== undefined ? Array.from(new Map(Domain.map(item => [item.Domain, item])).values()).map((Vend) => (<option key={Vend.Id} value={Vend.Id}>{Vend.Domain}</option>)) : ''}
+                            </select>
+                            {formik.errors.Domain ? (
+                              <div
+                                style={{
+                                  paddingTop: 0,
+                                  color: "#B2484D",
+                                  fontSize: ".75rem",
+                                  fontFamily: "Segoe UI"
+                                }}
+                              >
+                                {JSON.stringify(formik.errors.Domain).replace(/"/g, '')}
+                              </div>
+                            ) : null}
+                          </div>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })()}
                   {/* 5.Sub Category */}
                   <div className='col-md-3'>
                     <label className='col-form-label'>Sub Category</label>
